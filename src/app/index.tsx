@@ -7,7 +7,6 @@ import { StyleSheet, View } from "react-native";
 export default function App() {
   return (
     <>
-      <StatusBar style="light" />
       <View style={styles.container}>
         <CrowdLogoBox />
         <StartButton
@@ -17,6 +16,7 @@ export default function App() {
           textStyle={styles.customButtonText}
         />
       </View>
+      <StatusBar style="light" />
     </>
   );
 }

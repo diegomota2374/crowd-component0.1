@@ -11,6 +11,7 @@ export default function RootLayout() {
       <Stack.Screen
         name="screens/mobileNumber"
         options={{
+          headerShown: true,
           headerTitle: "",
           headerBackground: () => (
             <View style={{ backgroundColor: "#1A1A1A", flex: 1 }} />
