@@ -1,12 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { useForm, FormProvider } from "react-hook-form";
-import PhoneInputComponent from "@/components/PhoneInputComponent/PhoneInputComponent";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
-import { router } from "expo-router";
 
-const MobileNumber: React.FC = () => {
+import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
+
+const socialAccount: React.FC = () => {
   const methods = useForm({
     defaultValues: {
       phoneNumber: "",
@@ -23,22 +21,13 @@ const MobileNumber: React.FC = () => {
     <FormProvider {...methods}>
       <View style={style.container}>
         <View style={style.inputContent}>
-          <Text style={style.title}>Enter your mobile number</Text>
-          <PhoneInputComponent name="phoneNumber" />
-          <TouchableOpacity
-            onPress={() => router.navigate("screens/socialAccount")}
-          >
-            <Text style={style.socialButton}>
-              Or connect with social{"  "}
-              <AntDesign name="arrowright" size={24} color="#535AFF" />
-            </Text>
-          </TouchableOpacity>
+          <Text style={style.title}>Choose an account</Text>
+          <Text style={style.text}>
+            By clicking on a social option you may recieve an SMS for
+            verification. Message and data rates may apply.
+          </Text>
         </View>
         <View style={style.buttonContent}>
-          <Text style={style.text}>
-            By continuing you may receive an SMS for verification. Message and
-            data rates may apply.
-          </Text>
           <PrimaryButton
             title="Next"
             onPress={methods.handleSubmit(onSubmit)}
@@ -81,4 +70,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default MobileNumber;
+export default socialAccount;

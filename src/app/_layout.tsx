@@ -19,6 +19,17 @@ export default function RootLayout() {
           headerTintColor: "#979797",
         }}
       />
+      <Stack.Screen
+        name="screens/socialAccount"
+        options={{
+          headerShown: true,
+          headerTitle: "",
+          headerBackground: () => (
+            <View style={{ backgroundColor: "#1A1A1A", flex: 1 }} />
+          ),
+          headerTintColor: "#979797",
+        }}
+      />
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="+not-found" />
     </Stack>
