@@ -1,32 +1,15 @@
-import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
+import { FormProvider } from "react-hook-form";
 import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
-import { router, useLocalSearchParams } from "expo-router";
 import FourDigitInput from "@/components/FourDigitInput/FourDigitInput";
-
-interface FormValues {
-  phoneNumber: string;
-  fourDigitCode: string[];
-}
+import useMobileNumber from "@/hooks/useMobileNumber";
+import useFourDigitForm from "@/hooks/useFourDigitForm";
+import { router } from "expo-router";
 
 const FourDigit: React.FC = () => {
-  const { mobileNumber } = useLocalSearchParams<{ mobileNumber: string }>();
-
-  const methods = useForm<FormValues>({
-    defaultValues: {
-      phoneNumber: "",
-      fourDigitCode: ["", "", "", ""], // Initialize the form with an empty 4-digit code
-    },
-    mode: "onBlur",
-  });
-
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const fourDigitCode = data.fourDigitCode.join(""); // Combine the array into a single string
-    console.log("Submitted 4-digit code:", fourDigitCode);
-    // Handle the form submission, e.g., send data to an API
-  };
+  const mobileNumber = useMobileNumber(); // Get the mobile number
+  const { methods, onSubmit, errorMessage } = useFourDigitForm(); // Get form methods and onSubmit handler
 
   return (
     <FormProvider {...methods}>
@@ -34,7 +17,7 @@ const FourDigit: React.FC = () => {
         <View style={style.inputContent}>
           <Text style={style.title}>Enter the 4-digit code sent to you at</Text>
           <Text style={style.mobileNumber}>{`+${mobileNumber}`}</Text>
-          <FourDigitInput />
+          <FourDigitInput errorMessage={errorMessage as string} />
           <TouchableOpacity
             onPress={() => router.navigate("screens/socialAccount")}
           >

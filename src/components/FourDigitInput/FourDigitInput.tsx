@@ -3,7 +3,11 @@ import { Controller } from "react-hook-form";
 import useFourDigitInput from "@/hooks/useFourDigitInput ";
 import { getErrorMessage } from "@/utils/getErrorMessage";
 
-const FourDigitInput: React.FC = () => {
+interface FourDigitInputProps {
+  errorMessage?: string; // Optional prop to receive error messages
+}
+
+const FourDigitInput: React.FC<FourDigitInputProps> = ({ errorMessage }) => {
   const { control, errors, inputs, handleChangeText } = useFourDigitInput();
 
   return (
@@ -13,7 +17,7 @@ const FourDigitInput: React.FC = () => {
       defaultValue={["", "", "", ""]}
       rules={{
         validate: (value) =>
-          value.join("").length === 4 || "Please enter a valid 4-digit code.",
+          value.join("").length === 4 || "Please enter a valid code.",
       }}
       render={({ field: { onChange, value } }) => (
         <View style={styles.container}>
@@ -36,10 +40,12 @@ const FourDigitInput: React.FC = () => {
               />
             ))}
           </View>
-          {getErrorMessage(errors, "fourDigitCode") && (
+          {getErrorMessage(errors, "fourDigitCode") ? (
             <Text style={styles.errorText}>
               {getErrorMessage(errors, "fourDigitCode")}
             </Text>
+          ) : (
+            errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>
           )}
         </View>
       )}
