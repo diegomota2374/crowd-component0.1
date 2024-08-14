@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { useState } from "react";
+import { Text, StyleSheet } from "react-native";
 import PhoneInput, {
   ICountry as CountryType,
 } from "react-native-international-phone-number";
@@ -11,7 +11,6 @@ interface PhoneInputComponentProps {
 }
 
 const PhoneInputComponent: React.FC<PhoneInputComponentProps> = ({ name }) => {
-  const [isFocused, setIsFocused] = useState(false);
   const { control } = useFormContext();
   const {
     field: { onChange, onBlur, value },

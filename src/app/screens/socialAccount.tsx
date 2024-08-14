@@ -62,6 +62,7 @@ const style = StyleSheet.create({
     color: "#535AFF",
   },
   buttonContent: {
+    width: "100%",
     marginBottom: 40,
     gap: 20,
   },

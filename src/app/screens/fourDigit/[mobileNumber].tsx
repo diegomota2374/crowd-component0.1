@@ -1,12 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useForm, FormProvider } from "react-hook-form";
-import PhoneInputComponent from "@/components/PhoneInputComponent/PhoneInputComponent";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 
-const MobileNumber: React.FC = () => {
+const fourDigit: React.FC = () => {
+  const { mobileNumber } = useLocalSearchParams();
+
   const methods = useForm({
     defaultValues: {
       phoneNumber: "",
@@ -15,31 +15,24 @@ const MobileNumber: React.FC = () => {
   });
 
   const onSubmit = (data: any) => {
-    console.log(data.phoneNumber);
+    console.log("Submitted data:", data);
     // Handle the form submission, e.g., send data to an API
-    router.navigate(`screens/fourDigit/${data.phoneNumber}`);
   };
 
   return (
     <FormProvider {...methods}>
       <View style={style.container}>
         <View style={style.inputContent}>
-          <Text style={style.title}>Enter your mobile number</Text>
-          <PhoneInputComponent name="phoneNumber" />
+          <Text style={style.title}>Enter the 4-digit code sent to you at</Text>
+          <Text style={style.mobileNumber}>{`+${mobileNumber}.`}</Text>
+          <Text style={style.mobileNumber}>4-number??</Text>
           <TouchableOpacity
             onPress={() => router.navigate("screens/socialAccount")}
           >
-            <Text style={style.socialButton}>
-              Or connect with social{"  "}
-              <AntDesign name="arrowright" size={24} color="#535AFF" />
-            </Text>
+            <Text style={style.resendCode}>Resend Code</Text>
           </TouchableOpacity>
         </View>
         <View style={style.buttonContent}>
-          <Text style={style.text}>
-            By continuing you may receive an SMS for verification. Message and
-            data rates may apply.
-          </Text>
           <PrimaryButton
             title="Next"
             onPress={methods.handleSubmit(onSubmit)}
@@ -69,11 +62,16 @@ const style = StyleSheet.create({
   inputContent: {
     gap: 25,
   },
-  socialButton: {
-    fontSize: 20,
+  mobileNumber: {
+    fontSize: 15,
+    color: "#fff",
+  },
+  resendCode: {
+    fontSize: 15,
     color: "#535AFF",
   },
   buttonContent: {
+    width: "100%",
     marginBottom: 40,
     gap: 20,
   },
@@ -82,4 +80,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default MobileNumber;
+export default fourDigit;
