@@ -1,21 +1,30 @@
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
 import { router, useLocalSearchParams } from "expo-router";
+import FourDigitInput from "@/components/FourDigitInput/FourDigitInput";
 
-const fourDigit: React.FC = () => {
-  const { mobileNumber } = useLocalSearchParams();
+interface FormValues {
+  phoneNumber: string;
+  fourDigitCode: string[];
+}
 
-  const methods = useForm({
+const FourDigit: React.FC = () => {
+  const { mobileNumber } = useLocalSearchParams<{ mobileNumber: string }>();
+
+  const methods = useForm<FormValues>({
     defaultValues: {
       phoneNumber: "",
+      fourDigitCode: ["", "", "", ""], // Initialize the form with an empty 4-digit code
     },
     mode: "onBlur",
   });
 
-  const onSubmit = (data: any) => {
-    console.log("Submitted data:", data);
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    const fourDigitCode = data.fourDigitCode.join(""); // Combine the array into a single string
+    console.log("Submitted 4-digit code:", fourDigitCode);
     // Handle the form submission, e.g., send data to an API
   };
 
@@ -24,8 +33,8 @@ const fourDigit: React.FC = () => {
       <View style={style.container}>
         <View style={style.inputContent}>
           <Text style={style.title}>Enter the 4-digit code sent to you at</Text>
-          <Text style={style.mobileNumber}>{`+${mobileNumber}.`}</Text>
-          <Text style={style.mobileNumber}>4-number??</Text>
+          <Text style={style.mobileNumber}>{`+${mobileNumber}`}</Text>
+          <FourDigitInput />
           <TouchableOpacity
             onPress={() => router.navigate("screens/socialAccount")}
           >
@@ -80,4 +89,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default fourDigit;
+export default FourDigit;

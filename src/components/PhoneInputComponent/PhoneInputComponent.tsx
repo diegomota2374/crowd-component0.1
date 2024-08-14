@@ -1,38 +1,22 @@
-import { useState } from "react";
+import React from "react";
 import { Text, StyleSheet } from "react-native";
 import PhoneInput, {
   ICountry as CountryType,
 } from "react-native-international-phone-number";
-import { useController, useFormContext } from "react-hook-form";
-import { Country } from "@/models/phoneNumber";
+import { usePhoneInput } from "@/hooks/usePhoneInput";
 
 interface PhoneInputComponentProps {
   name: string;
 }
 
 const PhoneInputComponent: React.FC<PhoneInputComponentProps> = ({ name }) => {
-  const { control } = useFormContext();
   const {
-    field: { onChange, onBlur, value },
-    fieldState: { error },
-  } = useController({
-    name,
-    control,
-    defaultValue: "",
-    rules: {
-      required: "Phone number is required",
-    },
-  });
-
-  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
-
-  const handleInputValue = (phoneNumber: string) => {
-    onChange(phoneNumber);
-  };
-
-  const handleSelectedCountry = (country: Country) => {
-    setSelectedCountry(country);
-  };
+    value,
+    error,
+    selectedCountry,
+    handleInputValue,
+    handleSelectedCountry,
+  } = usePhoneInput({ name });
 
   return (
     <>
