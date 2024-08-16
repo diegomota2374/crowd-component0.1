@@ -6,7 +6,7 @@ import {
 } from "react-native";
 
 interface PrimaryButtonProps extends TouchableOpacityProps {
-  title: string;
+  title: any;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({

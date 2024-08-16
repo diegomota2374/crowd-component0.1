@@ -20,7 +20,7 @@ export const usePhoneInput = ({ name }: UsePhoneInputProps) => {
       validate: (value) => {
         // Remove void space
         const cleanedValue = value.replace(/\s+/g, "");
-        return /^[+]?\d{7,16}$/.test(cleanedValue) || "Invalid phone number";
+        return /^[+]?\d{10,16}$/.test(cleanedValue) || "Invalid phone number";
       },
     },
   });
