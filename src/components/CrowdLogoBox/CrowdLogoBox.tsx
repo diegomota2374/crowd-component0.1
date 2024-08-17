@@ -1,30 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
-import useFontsLoader from "@/hooks/useFontsLoader";
 
 const CrowdLogoBox = () => {
-  const { fontsLoaded, error } = useFontsLoader();
-
-  if (!fontsLoaded) {
-    return null; // You can also show a loader or a splash screen here
-  }
-
-  if (error) {
-    return (
-      <View>
-        <Text>Error loading fonts</Text>
-      </View>
-    );
-  }
-
   return (
     <>
-      <View style={styles.shadowWrapper}>
-        <View style={styles.boxCrows}>
+      <View style={styles.shadowWrapper} testID="shadowWrapper">
+        <View style={styles.boxCrows} testID="boxCrows">
           <View style={styles.innerBox}>
             <Text style={styles.text}>Crowd</Text>
           </View>
         </View>
-        <View style={styles.topLeftShadow} />
+        <View style={styles.topLeftShadow} testID="topLeftShadow" />
       </View>
     </>
   );

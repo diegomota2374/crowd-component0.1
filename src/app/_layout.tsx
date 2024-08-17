@@ -58,6 +58,18 @@ export default function RootLayout() {
         }}
       />
 
+      <Stack.Screen
+        name="screens/avatarUser/avatarUser"
+        options={{
+          headerShown: true,
+          headerTitle: "",
+          headerBackground: () => (
+            <View style={{ backgroundColor: "#1A1A1A", flex: 1 }} />
+          ),
+          headerTintColor: "#979797",
+        }}
+      />
+
       <Stack.Screen name="+not-found" />
     </Stack>
   );

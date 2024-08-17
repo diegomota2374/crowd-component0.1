@@ -7,6 +7,7 @@ import { submitUserData } from "@/hooks/useUser/useUser";
 import { User } from "@/models/user";
 import { useState } from "react";
 import LoadingIndicator from "@/components/LoadingIndicator/LoadingIndicator";
+import { router } from "expo-router";
 
 const userName: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -38,6 +39,7 @@ const userName: React.FC = () => {
 
     try {
       await submitUserData(formData);
+      router.navigate("screens/avatarUser/avatarUser");
     } catch (error) {
       console.error("Failed to submit form data:", error);
     } finally {
@@ -56,7 +58,7 @@ const userName: React.FC = () => {
               name="firstName"
               rules={{ required: "First name is required" }}
               render={({ field: { onChange, onBlur, value } }) => (
-                <>
+                <View>
                   <TextInput
                     style={style.input}
                     placeholder="First"
@@ -70,7 +72,7 @@ const userName: React.FC = () => {
                       {errors.firstName.message}
                     </Text>
                   )}
-                </>
+                </View>
               )}
             />
             <Controller
@@ -78,7 +80,7 @@ const userName: React.FC = () => {
               name="lastName"
               rules={{ required: "Last name is required" }}
               render={({ field: { onChange, onBlur, value } }) => (
-                <>
+                <View>
                   <TextInput
                     style={style.input}
                     placeholder="Last"
@@ -92,7 +94,7 @@ const userName: React.FC = () => {
                       {errors.lastName.message}
                     </Text>
                   )}
-                </>
+                </View>
               )}
             />
           </View>
@@ -138,7 +140,8 @@ const style = StyleSheet.create({
     color: "#fff",
     borderBottomWidth: 1,
     borderColor: "#fff",
-    flex: 1,
+    width: 150,
+    // flex: 1,
   },
   socialButton: {
     fontSize: 20,
