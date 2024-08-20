@@ -15,7 +15,11 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   ...props
 }) => {
   return (
-    <TouchableOpacity style={[styles.submitButton, style]} {...props}>
+    <TouchableOpacity
+      testID="Submit"
+      style={[styles.submitButton, style]}
+      {...props}
+    >
       <Text style={styles.submitTextButton}>{title}</Text>
     </TouchableOpacity>
   );
