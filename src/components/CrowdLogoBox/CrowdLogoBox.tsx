@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text: {
-    fontFamily: "OpenSans-Regular",
     color: "#FFF",
     fontSize: 40,
     fontWeight: "bold",

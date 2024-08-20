@@ -21,6 +21,7 @@ const PhoneInputComponent: React.FC<PhoneInputComponentProps> = ({ name }) => {
   return (
     <>
       <PhoneInput
+        testID="phoneInput"
         value={value}
         onChangePhoneNumber={handleInputValue}
         selectedCountry={selectedCountry as CountryType}
