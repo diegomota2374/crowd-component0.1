@@ -3,7 +3,7 @@ import { Text, StyleSheet } from "react-native";
 import PhoneInput, {
   ICountry as CountryType,
 } from "react-native-international-phone-number";
-import { usePhoneInput } from "@/hooks/usePhoneInput";
+import { usePhoneInput } from "@/hooks/usePhoneInput/usePhoneInput";
 
 interface PhoneInputComponentProps {
   name: string;
