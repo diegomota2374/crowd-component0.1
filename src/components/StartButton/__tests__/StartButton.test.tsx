@@ -3,18 +3,18 @@ import StartButton from "../StartButton";
 
 describe("StartButton", () => {
   it("renders correctly with given title", () => {
-    const { getByText } = render(
+    const { getByTestId } = render(
       <StartButton title="Start" onPress={() => {}} />
     );
-    expect(getByText("Start")).toBeTruthy();
+    expect(getByTestId("startButton")).toBeTruthy();
   });
 
   it("triggers the onPress event when pressed", () => {
     const onPressMock = jest.fn();
-    const { getByText } = render(
+    const { getByTestId } = render(
       <StartButton title="Start" onPress={onPressMock} />
     );
-    const button = getByText("Start");
+    const button = getByTestId("startButton");
     fireEvent.press(button);
     expect(onPressMock).toHaveBeenCalled();
   });

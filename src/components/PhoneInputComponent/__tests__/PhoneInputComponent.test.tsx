@@ -3,7 +3,7 @@ import { render, fireEvent } from "@testing-library/react-native";
 import { usePhoneInput } from "@/hooks/usePhoneInput/usePhoneInput";
 import PhoneInputComponent from "../PhoneInputComponent";
 
-jest.mock("@/hooks/usePhoneInput");
+jest.mock("@/hooks/usePhoneInput/usePhoneInput");
 
 describe("PhoneInputComponent", () => {
   beforeEach(() => {

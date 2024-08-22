@@ -23,7 +23,7 @@ const StartButton: React.FC<StartButtonProps> = ({
   return (
     <>
       <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-        <Text style={[styles.buttonText, textStyle]} testID="button">
+        <Text style={[styles.buttonText, textStyle]} testID="startButton">
           {`${title}      `}
           <AntDesign
             testID="arrow-icon"
