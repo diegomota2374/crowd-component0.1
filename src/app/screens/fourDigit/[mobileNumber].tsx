@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { FormProvider } from "react-hook-form";
 import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
 import FourDigitInput from "@/components/FourDigitInput/FourDigitInput";
-import useMobileNumber from "@/hooks/useMobileNumber";
-import useFourDigitForm from "@/hooks/useFourDigitForm";
+import useMobileNumber from "@/hooks/useMobileNumber/useMobileNumber";
+import useFourDigitForm from "@/hooks/useFourDigitForm/useFourDigitForm";
 import { router } from "expo-router";
 
 const FourDigit: React.FC = () => {

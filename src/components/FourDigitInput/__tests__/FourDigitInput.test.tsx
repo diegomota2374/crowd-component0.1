@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 import FourDigitInput from "../FourDigitInput";
-import useFourDigitInput from "@/hooks/useFourDigitInput";
+import useFourDigitInput from "@/hooks/useFourDigitInput/useFourDigitInput";
 import { getErrorMessage } from "@/utils/getErrorMessage";
 import { useFormContext } from "react-hook-form";
 
