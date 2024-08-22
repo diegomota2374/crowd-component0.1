@@ -1,6 +1,6 @@
 import { View, TextInput, StyleSheet, Text } from "react-native";
 import { Controller } from "react-hook-form";
-import useFourDigitInput from "@/hooks/useFourDigitInput ";
+import useFourDigitInput from "@/hooks/useFourDigitInput";
 import { getErrorMessage } from "@/utils/getErrorMessage";
 
 interface FourDigitInputProps {
@@ -24,6 +24,7 @@ const FourDigitInput: React.FC<FourDigitInputProps> = ({ errorMessage }) => {
           <View style={styles.inputContainer}>
             {value.map((digit: string, index: number) => (
               <TextInput
+                testID="TextInput"
                 key={index}
                 ref={(ref) => (inputs.current[index] = ref)}
                 style={[

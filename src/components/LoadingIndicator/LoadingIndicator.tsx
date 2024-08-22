@@ -6,7 +6,7 @@ const LoadingIndicator: React.FC<{
 }> = ({ size = "small", color = "#fff" }) => {
   return (
     <View style={styles.container}>
-      <ActivityIndicator size={size} color={color} />
+      <ActivityIndicator testID="loading-indicator" size={size} color={color} />
     </View>
   );
 };
