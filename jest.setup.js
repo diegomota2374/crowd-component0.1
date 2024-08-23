@@ -1,1 +1,2 @@
-process.env.EXPO_PUBLIC_API_URL = "http://example.com";
+// jest.setup.js
+require("dotenv").config({ path: "./.env" });

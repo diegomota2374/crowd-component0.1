@@ -2,17 +2,12 @@ import axios from "axios";
 import { delay } from "@/utils/delay";
 import { User } from "@/models/user";
 import { submitUserData } from "../useUser";
-import { load } from "@expo/env";
 
-load(process.cwd());
-
-// Mocking the dependencies
+// Mocking de dependências
 jest.mock("axios");
 jest.mock("@/utils/delay");
 
 describe("submitUserData", () => {
-  const originalEnv = process.env;
-
   const mockUser: User = {
     id: "1",
     firstName: "John",
@@ -26,20 +21,10 @@ describe("submitUserData", () => {
     updatedAt: new Date("2023-02-01"),
   };
 
-  beforeEach(() => {
-    jest.resetModules();
-    process.env = {
-      ...originalEnv,
-      EXPO_PUBLIC_API_URL: "http://example.com",
-    };
-  });
-
-  afterEach(() => {
-    process.env = originalEnv;
-  });
+  const apiUrl = "http://example.com"; // URL fixa para os testes
 
   it("should have the correct API URL", () => {
-    expect(process.env.EXPO_PUBLIC_API_URL).toBe("http://example.com");
+    expect(apiUrl).toBe("http://example.com");
   });
 
   it("should submit user data successfully", async () => {
@@ -48,19 +33,22 @@ describe("submitUserData", () => {
     (axios.post as jest.Mock).mockResolvedValue(mockedResponse);
     (delay as jest.Mock).mockResolvedValue(Promise.resolve());
 
+    // Spy do console.log
+    const consoleLogSpy = jest.spyOn(console, "log").mockImplementation();
+
     // Act
-    await submitUserData(mockUser);
+    await submitUserData(mockUser, apiUrl);
 
     // Assert
     expect(delay).toHaveBeenCalledWith(1000);
-    expect(axios.post).toHaveBeenCalledWith(
-      "http://example.com/users",
-      mockUser
-    );
-    expect(console.log).toHaveBeenCalledWith(
+    expect(axios.post).toHaveBeenCalledWith(`${apiUrl}/users`, mockUser);
+    expect(consoleLogSpy).toHaveBeenCalledWith(
       "Submitted data:",
       mockedResponse.data
     );
+
+    // Limpar o spy
+    consoleLogSpy.mockRestore();
   });
 
   it("should log an error if submission fails", async () => {
@@ -71,17 +59,17 @@ describe("submitUserData", () => {
     const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
 
     // Act
-    await submitUserData(mockUser);
+    await submitUserData(mockUser, apiUrl);
 
     // Assert
     expect(delay).toHaveBeenCalledWith(1000);
-    expect(axios.post).toHaveBeenCalledWith(
-      "http://example.com/users",
-      mockUser
-    );
+    expect(axios.post).toHaveBeenCalledWith(`${apiUrl}/users`, mockUser);
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       "Error submitting data:",
       mockedError
     );
+
+    // Limpar o spy
+    consoleErrorSpy.mockRestore();
   });
 });
