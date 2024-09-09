@@ -10,3 +10,7 @@ export interface User {
   roles?: string[];
   profileImageUrl?: string;
 }
+export interface UserAvatar {
+  id?: string;
+  profileImageUrl: string;
+}

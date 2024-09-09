@@ -35,11 +35,16 @@ const userName: React.FC = () => {
       createdAt: new Date(),
       isActive: true,
     };
-    console.log(formData);
 
     try {
-      await submitUserData(formData);
-      router.navigate("screens/avatarUser/avatarUser");
+      const userId = await submitUserData(formData);
+      console.log("User ID obtido:", userId); // Adicione isso
+      if (userId) {
+        router.push({
+          pathname: "screens/avatarUser/avatarUser",
+          params: { userId },
+        });
+      }
     } catch (error) {
       console.error("Failed to submit form data:", error);
     } finally {
